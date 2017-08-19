@@ -16,6 +16,14 @@
         <source>help.browse_admin</source>
         <target><![CDATA[Browse the <strong>admin backend</strong> of the demo application.]]></target>
       </trans-unit>
+      <trans-unit id="help.app_description">
+        <source>help.app_description</source>
+        <target><![CDATA[This is a <strong>demo application</strong> built in the Symfony Framework to illustrate the recommended way of developing Symfony applications.]]></target>
+      </trans-unit>
+      <trans-unit id="help.more_information">
+        <source>help.more_information</source>
+        <target><![CDATA[For more information, check out the <a href="http://symfony.com/doc">Symfony doc</a>.]]></target>
+      </trans-unit>
 
       <trans-unit id="action.browse_app">
         <source>action.browse_app</source>
@@ -24,6 +32,11 @@
       <trans-unit id="action.browse_admin">
         <source>action.browse_admin</source>
         <target>Browse backend</target>
+      </trans-unit>
+
+      <trans-unit id="post.no_posts_found">
+        <source>post.no_posts_found</source>
+        <target>No posts found.</target>
       </trans-unit>
 
     </body>

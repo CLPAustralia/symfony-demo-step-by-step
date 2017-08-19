@@ -9,8 +9,29 @@
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+    
+    <body id="{% block body_id %}{% endblock %}">    
+      
+        <div class="container body-container">
+            {% block body %}
+                <div class="row">
+                    <div id="main" class="col-sm-9">
+                        {{ include('default/_flash_messages.html.twig') }}
+                        {% block main %}{% endblock %}
+                    </div>
+                    <div id="sidebar" class="col-sm-3">
+                        {% block sidebar %}
+                            {{ render_esi(controller('FrameworkBundle:Template:template', {
+                                'template': 'blog/about.html.twig',
+                                'sharedAge': 600,
+                                '_locale': app.request.locale
+                            })) }}
+                        {% endblock %}
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+
     </body>
+
 </html>
