@@ -3,6 +3,19 @@
     <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
         <body>
 
+            <trans-unit id="note">
+                <source>note</source>
+                <target>NOTE</target>
+            </trans-unit>
+            <trans-unit id="tip">
+                <source>tip</source>
+                <target>TIP</target>
+            </trans-unit>
+            <trans-unit id="mit_license">
+                <source>mit_license</source>
+                <target>MIT License</target>
+            </trans-unit>
+
             <trans-unit id="title.homepage">
                 <source>title.homepage</source>
                 <target><![CDATA[Welcome to the <strong>Symfony Demo</strong> application]]></target>
@@ -19,6 +32,10 @@
             <trans-unit id="label.password">
                 <source>label.password</source>
                 <target>Password</target>
+            </trans-unit>
+			<trans-unit id="label.role">
+                <source>label.role</source>
+                <target>Role</target>
             </trans-unit>
 
             <trans-unit id="help.browse_app">
@@ -41,6 +58,22 @@
                 <source>help.login_users</source>
                 <target>Try either of the following users</target>
             </trans-unit>
+            <trans-unit id="help.role_user">
+                <source>help.role_user</source>
+                <target>regular user</target>
+            </trans-unit>
+            <trans-unit id="help.role_admin">
+                <source>help.role_admin</source>
+                <target>administrator</target>
+            </trans-unit>
+            <trans-unit id="help.reload_fixtures">
+                <source>help.reload_fixtures</source>
+                <target>If these users don't work, reload application fixtures by running this command from the terminal:</target>
+            </trans-unit>
+            <trans-unit id="help.add_user">
+                <source>help.add_user</source>
+                <target>If you want to create new users, run this other command:</target>
+            </trans-unit>
 
             <trans-unit id="menu.homepage">
                 <source>menu.homepage</source>
@@ -54,7 +87,15 @@
                 <source>menu.logout</source>
                 <target>Logout</target>
             </trans-unit>
-
+            <trans-unit id="menu.toggle_nav">
+                <source>menu.toggle_nav</source>
+                <target>Toggle navigation</target>
+            </trans-unit>
+            <trans-unit id="menu.choose_language">
+                <source>menu.choose_language</source>
+                <target>Choose language</target>
+            </trans-unit>
+ 
             <trans-unit id="action.browse_app">
                 <source>action.browse_app</source>
                 <target>Browse application</target>
@@ -83,6 +124,10 @@
             <trans-unit id="post.commented_on">
                 <source>post.commented_on</source>
                 <target>commented on</target>
+            </trans-unit>
+            <trans-unit id="post.num_comments">
+                <source>post.num_comments</source>
+                <target>%count% comment|%count% comments</target>
             </trans-unit>
 
         </body>

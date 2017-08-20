@@ -9,4 +9,4 @@ homepage:
     defaults:
         _controller: FrameworkBundle:Template:template
         template:   default/homepage.html.twig
-        _locale:    %locale%
+        _locale:    '%locale%'
