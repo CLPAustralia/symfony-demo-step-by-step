@@ -33,4 +33,12 @@ class BlogController extends Controller
   {
     return $this->render('blog/post_show.html.twig', ['post' => $post]);
   }
+
+  /**
+   * 
+   * */
+  public function commentFormAction(Post $post)
+  {
+    return new Response("TODO: commentFormAction");
+  }
 }
