@@ -20,10 +20,9 @@ class BlogController extends Controller
    * @Route("/", defaults={"page": "1"}, name="blog_index")
    * @Route("/page/{page}", requirements={"page": "[1-9]\d*"}, name="blog_index_paginated")
    * */
-  public function indexAction(LoggerInterface $logger, $page)
+  public function indexAction($page)
   {
     $posts = $this->getDoctrine()->getRepository(Post::class)->findLatest($page);
-    $logger->info('Total posts retrieved: '.count($posts));
     return $this->render('blog/index.html.twig', ['posts' => $posts] );
   }
 

@@ -25,6 +25,11 @@
         <target><![CDATA[For more information, check out the <a href="http://symfony.com/doc">Symfony doc</a>.]]></target>
       </trans-unit>
 
+      <trans-unit id="menu.homepage">
+        <source>menu.homepage</source>
+        <target>Homepage</target>
+      </trans-unit>
+
       <trans-unit id="action.browse_app">
         <source>action.browse_app</source>
         <target>Browse application</target>
