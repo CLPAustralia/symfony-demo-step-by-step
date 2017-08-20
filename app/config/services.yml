@@ -20,3 +20,9 @@ services:
         tags:
             - { name: twig.extension }
 
+    app.twig.intl_extension:
+        public: false
+        class:  Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+

@@ -31,6 +31,6 @@ class BlogController extends Controller
    * */
   public function postShowAction(Post $post)
   {
-    return new Response("TODO: blog_post");
+    return $this->render('blog/post_show.html.twig', ['post' => $post]);
   }
 }
