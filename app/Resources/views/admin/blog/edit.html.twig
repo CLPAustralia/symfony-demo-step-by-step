@@ -12,4 +12,17 @@
     }, with_context = false) }}
 {% endblock %}
 
+{% block sidebar %}
+    <div class="section actions">
+        {{ include('admin/blog/_form.html.twig', {
+            form: delete_form,
+            button_label: 'action.delete_post'|trans,
+            button_css: 'btn btn-lg btn-block btn-danger',
+            show_confirmation: true,
+        }, with_context = false) }}
+    </div>
+
+    {{ parent() }}
+
+{% endblock %}
 
