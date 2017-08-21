@@ -80,6 +80,11 @@
         </div>
     </div>
 {% endblock %}
+{% block sidebar %}
+
+    {{ parent() }}
+
+{% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
