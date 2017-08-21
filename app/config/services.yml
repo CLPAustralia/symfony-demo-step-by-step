@@ -17,6 +17,9 @@ services:
     markdown:
         class: AppBundle\Utils\Markdown
 
+    slugger:
+        class: AppBundle\Utils\Slugger
+
     app.twig.app_extension:
         public:    false
         class:     AppBundle\Twig\AppExtension
