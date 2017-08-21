@@ -12,6 +12,8 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('css/bootstrap-flatly-3.3.7.min.css') }}">
             <link rel="stylesheet" href="{{ asset('css/font-awesome-4.7.0.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/main.css') }}">
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -138,7 +140,10 @@
 
         {% block javascripts %}
             <script src="{{ asset('js/jquery-2.2.4.min.js') }}"></script>
+            <script src="{{ asset('js/moment.min.js') }}"></script>
             <script src="{{ asset('js/bootstrap-3.3.7.min.js') }}"></script>
+            <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
+            <script src="{{ asset('js/main.js') }}"></script>
         {% endblock %}
 
     </body>
