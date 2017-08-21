@@ -1,8 +1,3 @@
-# Learn more about services, parameters and containers at
-# https://symfony.com/doc/current/service_container.html
-parameters:
-    #parameter_name: value
-
 services:
 
     AppBundle\:
@@ -14,12 +9,16 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
-    markdown:
-        class: AppBundle\Utils\Markdown
-
+    # First we define some basic services to make these utilities available in
+    # the entire application
     slugger:
         class: AppBundle\Utils\Slugger
 
+    markdown:
+        class: AppBundle\Utils\Markdown
+
+    # These are the Twig extensions that create new filters and functions for
+    # using them in the templates
     app.twig.app_extension:
         public:    false
         class:     AppBundle\Twig\AppExtension

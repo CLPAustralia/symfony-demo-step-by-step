@@ -2,32 +2,55 @@
 
 namespace AppBundle\Controller\Admin;
 
-use Psr\Log\LoggerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Post;
 use AppBundle\Form\PostType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Psr\Log\LoggerInterface;
 
 /**
+ * Controller used to manage blog contents in the backend.
+ *
+ * Please note that the application backend is developed manually for learning
+ * purposes. However, in your real Symfony application you should use any of the
+ * existing bundles that let you generate ready-to-use backends without effort.
+ *
+ * See http://knpbundles.com/keyword/admin
+ *
  * @Route("/admin/post")
- * */
+ * @Security("has_role('ROLE_ADMIN')")
+ *
+ * @author Ryan Weaver <weaverryan@gmail.com>
+ * @author Javier Eguiluz <javier.eguiluz@gmail.com>
+ */
 class BlogController extends Controller
 {
-
     /**
+     * Lists all Post entities.
+     *
+     * This controller responds to two different routes with the same URL:
+     *   * 'admin_post_index' is the route with a name that follows the same
+     *     structure as the rest of the controllers of this class.
+     *   * 'admin_index' is a nice shortcut to the backend homepage. This allows
+     *     to create simpler links in the templates. Moreover, in the future we
+     *     could move this annotation to any other controller while maintaining
+     *     the route name and therefore, without breaking any existing link.
+     *
      * @Route("/", name="admin_index")
      * @Route("/", name="admin_post_index")
+     * @Method("GET")
      */
     public function indexAction(LoggerInterface $logger)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $posts = $entityManager->getRepository(Post::class)->findBy([], ['publishedAt' => 'DESC']);
-        return $this->render('admin/blog/index.html.twig', ['posts' => $posts]);
+
+       return $this->render('admin/blog/index.html.twig', ['posts' => $posts]);
     }
 
     /**
@@ -41,7 +64,7 @@ class BlogController extends Controller
      * it responds to all methods).
      */
     public function newAction(Request $request)
-    {   
+    {
         $post = new Post();
         $post->setAuthorEmail($this->getUser()->getEmail());
 
@@ -70,15 +93,15 @@ class BlogController extends Controller
 
             if ($form->get('saveAndCreateNew')->isClicked()) {
                 return $this->redirectToRoute('admin_post_new');
-            }   
+            }
 
             return $this->redirectToRoute('admin_post_index');
-        }   
+        }
 
         return $this->render('admin/blog/new.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
-        ]); 
+        ]);
     }
 
     /**
@@ -94,19 +117,22 @@ class BlogController extends Controller
         //   2. Using a "voter" (see http://symfony.com/doc/current/cookbook/security/voters_data_permission.html)
         if (null === $this->getUser() || !$post->isAuthor($this->getUser())) {
             throw $this->createAccessDeniedException('Posts can only be shown to their authors.');
-        }   
+        }
 
         $deleteForm = $this->createDeleteForm($post);
 
         return $this->render('admin/blog/show.html.twig', [
             'post' => $post,
             'delete_form' => $deleteForm->createView(),
-        ]); 
+        ]);
     }
 
     /**
-    * @Route("/{id}/edit", requirements={"id": "\d+"}, name="admin_post_edit")
-    */
+     * Displays a form to edit an existing Post entity.
+     *
+     * @Route("/{id}/edit", requirements={"id": "\d+"}, name="admin_post_edit")
+     * @Method({"GET", "POST"})
+     */
     public function editAction(LoggerInterface $logger, Post $post, Request $request)
     {
         $logger->info("### Admin Blog Edit");
@@ -128,16 +154,16 @@ class BlogController extends Controller
             $this->addFlash('success', 'post.updated_successfully');
 
             return $this->redirectToRoute('admin_post_edit', ['id' => $post->getId()]);
-        }   
+        }
 
         return $this->render('admin/blog/edit.html.twig', [
             'post' => $post,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ]); 
+        ]);
     }
 
-    /** 
+    /**
      * Deletes a Post entity.
      *
      * @Route("/{id}", name="admin_post_delete")
@@ -149,7 +175,7 @@ class BlogController extends Controller
      * The isAuthor() method is defined in the AppBundle\Entity\Post entity.
      */
     public function deleteAction(Request $request, Post $post)
-    {   
+    {
         $form = $this->createDeleteForm($post);
         $form->handleRequest($request);
 
@@ -160,12 +186,12 @@ class BlogController extends Controller
             $entityManager->flush();
 
             $this->addFlash('success', 'post.deleted_successfully');
-        }   
+        }
 
         return $this->redirectToRoute('admin_post_index');
-    }   
+    }
 
-    /** 
+    /**
      * Creates a form to delete a Post entity by id.
      *
      * This is necessary because browsers don't support HTTP methods different
@@ -179,12 +205,11 @@ class BlogController extends Controller
      * @return \Symfony\Component\Form\Form The form
      */
     private function createDeleteForm(Post $post)
-    {   
+    {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('admin_post_delete', ['id' => $post->getId()]))
             ->setMethod('DELETE')
             ->getForm()
-        ;   
-    }   
-
+        ;
+    }
 }
