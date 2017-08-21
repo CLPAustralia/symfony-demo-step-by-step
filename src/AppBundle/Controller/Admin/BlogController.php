@@ -24,8 +24,35 @@ class BlogController extends Controller
      */
     public function indexAction(LoggerInterface $logger)
     {
-        $logger->info("### Admin Blog Index");
-        return new Response("TODO: admin index / admin post index");
+        $entityManager = $this->getDoctrine()->getManager();
+        $posts = $entityManager->getRepository(Post::class)->findBy([], ['publishedAt' => 'DESC']);
+        return $this->render('admin/blog/index.html.twig', ['posts' => $posts]);
+    }
+
+    /**
+     * Creates a new Post entity.
+     *
+     * @Route("/new", name="admin_post_new")
+     * @Method({"GET", "POST"})
+     *
+     * NOTE: the Method annotation is optional, but it's a recommended practice
+     * to constraint the HTTP methods each controller responds to (by default
+     * it responds to all methods).
+     */
+    public function newAction(Request $request)
+    {   
+        return new Response("TODO: admin_post_new");
+    }
+
+    /**
+     * Finds and displays a Post entity.
+     *
+     * @Route("/{id}", requirements={"id": "\d+"}, name="admin_post_show")
+     * @Method("GET")
+     */
+    public function showAction(Post $post)
+    {
+        return new Response("TODO: admin_post_show");
     }
 
     /**
